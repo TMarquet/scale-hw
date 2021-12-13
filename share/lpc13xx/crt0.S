@@ -23,7 +23,7 @@
 
                     .extern  __tos
 
-// ----------------------------------------------------------------------------
+// ============================================================================
 
 /* Interrupt (or exception) vector table, per Figure 2.2 of
  *
@@ -31,9 +31,9 @@
  */
                     .section .data.__irq_handler, "w"
 
-                    .global  __irq_vector
+                    .global  __irq_table
 
-__irq_vector:       .word    __tos             // 0x00000000 => Top of Stack    
+__irq_table:        .word    __tos             // 0x00000000 => Top of Stack    
                     .word    __irq_handler_rst // 0x00000004 => reset         handler 
                     .word    __irq_handler_nul // 0x00000008 => NMI           handler 
                     .word    __irq_handler_nul // 0x0000000C => Hard  fault   handler
@@ -61,7 +61,7 @@ __irq_vector:       .word    __tos             // 0x00000000 => Top of Stack
                     .global  __irq_handler_nul
                     .thumb_func
 
-__irq_handler_nul:  b        .                 // spin
+__irq_handler_nul:  b        .                 // spin ~= halt
 
                     .global  __irq_handler_rst
                     .thumb_func  
@@ -116,18 +116,18 @@ __irq_handler_tsc:  ldr      r0, =lpc13xx_tsc  // r0  = &lpc13xx_tsc
                     bx       lr                // return
 #endif
 
-// ----------------------------------------------------------------------------
+// ============================================================================
 
                     .section .text.__start,       "x"	
 
                     .global  __start	
                     .thumb_func  
 	
-__start:            eors     r0, r0            // argc = 0
-                    eors     r1, r1            // argv = NULL
+__start:            eors     r0, r0            // argc  = 0
+                    eors     r1, r1            // argv  = NULL
   
-                    bl       main              // call main
+                    bl         main            // call    main
 
-                    bx       lr                // return
+                    b        .                 // spin ~= halt
 
-// ----------------------------------------------------------------------------
+// ============================================================================
