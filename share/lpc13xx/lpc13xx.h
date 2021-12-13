@@ -17,6 +17,10 @@
 #include "bsp.h"
 
 // Chapter  3, Section  3.5, Table   7: system configuration
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
 typedef struct {
           RW uint32_t SYSMEMREMAP;       // 0x0000          : system memory remap
@@ -231,7 +235,9 @@ typedef struct {
           RO RSVD(  4, 0x0FE4, 0x0FE4 ); // 0x003C...0x0FDF : reserved
           RO uint32_t FMSSTATCLR;        // 0x0FE8          : signature status clear
 } lpc13xx_fmc_dev_t;
-
+#ifdef __cplusplus
+}
+#endif
 extern lpc13xx_syscon_dev_t*  LPC13XX_SYSCON;
 extern lpc13xx_iocon_dev_t*   LPC13XX_IOCON;
 extern lpc13xx_gpio_dev_t*    LPC13XX_GPIO0;

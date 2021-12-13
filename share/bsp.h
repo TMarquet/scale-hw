@@ -19,6 +19,12 @@
 #define RW volatile       /* read/write */
 #define WR volatile       /* write/read */
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
 typedef enum {
   SCALE_CLOCK_TYPE_INT   =  0, // internal  clock
   SCALE_CLOCK_TYPE_EXT   =  1, // external  clock, i.e., crystal
@@ -70,6 +76,11 @@ typedef struct {
 
   bool               tsc;
 } scale_conf_t;
+
+#ifdef __cplusplus
+}
+#endif
+
 
 // default configuration
 extern scale_conf_t SCALE_CONF;

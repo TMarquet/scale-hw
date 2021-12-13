@@ -13,6 +13,12 @@
 
 #include "scale.h"
 
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 scale_conf_t SCALE_CONF = {
   .clock_type        = SCALE_CLOCK_TYPE_INT,
   .clock_freq_source = SCALE_CLOCK_FREQ_12MHZ,
@@ -608,3 +614,6 @@ scale_i2c_status_t scale_i2c_rd( scale_i2c_addr_t addr, uint8_t* x, size_t n ) {
 scale_i2c_status_t scale_i2c_wr( scale_i2c_addr_t addr, uint8_t* x, size_t n ) {
   return scale_i2c_fsm( addr, SCALE_I2C_MODE_WR, x, n );
 }
+#ifdef __cplusplus
+}
+#endif

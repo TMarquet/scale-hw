@@ -31,7 +31,7 @@ PROJECT_TARGETS  += ${PROJECT}.bin
 PROJECT_TARGETS  += ${PROJECT}.hex
 
 %.elf %.map : ${PROJECT_SOURCES} ${PROJECT_HEADERS}
-	@${GCC_PREFIX}gcc $(patsubst %, -I %, ${PROJECT_INCLUDES}) ${GCC_PATHS} ${GCC_FLAGS} ${SCALE_CONF} -Wl,-Map=${*}.map -o ${*}.elf ${PROJECT_SOURCES} ${GCC_LIBS}
+	@${GCC_PREFIX}g++ $(patsubst %, -I %, ${PROJECT_INCLUDES}) ${GCC_PATHS} ${GCC_FLAGS} ${SCALE_CONF} -Wl,-Map=${*}.map -o ${*}.elf ${PROJECT_SOURCES} ${GCC_LIBS}
 %.bin       : %.elf
 	@${GCC_PREFIX}objcopy ${OBJCOPY_FLAGS} -O binary ${<} ${@}
 %.hex       : %.elf

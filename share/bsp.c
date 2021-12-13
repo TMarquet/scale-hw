@@ -6,5 +6,11 @@
  */
 
 #include "bsp.h"
-
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 scale_conf_t scale_conf;
+#ifdef __cplusplus
+}
+#endif
